@@ -23,6 +23,14 @@
       font-size: 5vw;
       color: darkblue;
     }
+    img {
+      max-width: 60%;
+      height: auto;
+      margin: 20px auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
@@ -73,6 +81,9 @@
 <body>
   <h1>🎉 Happy Birthday! 🎉</h1>
   <p>Wishing you joy, laughter, and love on your special day!</p>
+
+  <!-- Birthday image -->
+  <img src="happy-birthday.png" alt="Happy Birthday balloons">
 
   <button onclick="for(let i=0;i<50;i++){createConfetti();}">🎂 Extra Confetti!</button>
 
