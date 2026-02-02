@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday!</title>
-  <link rel="icon" type="image/x-icon" href="happy-birthday.png">
   <style>
     body {
       margin: 0;
@@ -17,7 +16,7 @@
     h1 {
       font-size: 8vw;
       color: purple;
-      animation: bounce 1s infinite;
+      animation: bounce 1s infinite, glow 2s ease-in-out infinite alternate;
       margin-bottom: 20px;
     }
     p {
@@ -27,6 +26,10 @@
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px pink, 0 0 20px purple; }
+      to { text-shadow: 0 0 20px yellow, 0 0 40px orange; }
     }
     .confetti {
       position: fixed;
@@ -39,11 +42,39 @@
       0% { transform: translateY(-10px) rotate(0deg); }
       100% { transform: translateY(100vh) rotate(360deg); }
     }
+    .balloon {
+      position: fixed;
+      bottom: -100px;
+      width: 50px;
+      height: 70px;
+      background: radial-gradient(circle at 30% 30%, pink, purple);
+      border-radius: 50%;
+      animation: floatUp 10s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-200px); }
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: purple;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: darkblue;
+    }
   </style>
 </head>
 <body>
   <h1>🎉 Happy Birthday! 🎉</h1>
   <p>Wishing you joy, laughter, and love on your special day!</p>
+
+  <button onclick="for(let i=0;i<50;i++){createConfetti();}">🎂 Extra Confetti!</button>
 
   <script>
     // Popup greeting
@@ -61,8 +92,22 @@
 
       setTimeout(() => { confetti.remove(); }, 5000);
     }
-
     setInterval(createConfetti, 200);
+
+    // Balloon generator
+    function createBalloon() {
+      const balloon = document.createElement("div");
+      balloon.classList.add("balloon");
+      balloon.style.left = Math.random() * window.innerWidth + "px";
+      balloon.style.background = 
+        ["radial-gradient(circle at 30% 30%, pink, purple)",
+         "radial-gradient(circle at 30% 30%, lightblue, blue)",
+         "radial-gradient(circle at 30% 30%, yellow, orange)",
+         "radial-gradient(circle at 30% 30%, lightgreen, green)"][Math.floor(Math.random()*4)];
+      document.body.appendChild(balloon);
+      setTimeout(() => balloon.remove(), 10000);
+    }
+    setInterval(createBalloon, 1500);
   </script>
 </body>
 </html>
