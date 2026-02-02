@@ -1,31 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday!</title>
   <style>
     body {
+      margin: 0;
       background: linear-gradient(to right, pink, lightyellow);
       text-align: center;
       font-family: Arial, sans-serif;
-      padding-top: 100px;
+      padding: 5%;
+      overflow: hidden;
     }
     h1 {
-      font-size: 60px;
+      font-size: 8vw;
       color: purple;
       animation: bounce 1s infinite;
+      margin-bottom: 20px;
     }
     p {
-      font-size: 24px;
+      font-size: 5vw;
       color: darkblue;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
     }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      animation: fall 3s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
   </style>
 </head>
 <body>
   <h1>🎉 Happy Birthday! 🎉</h1>
   <p>Wishing you joy, laughter, and love on your special day!</p>
+
+  <script>
+    // Popup greeting
+    alert("🎂🎉 Happy Birthday! 🎉🎂\nWishing you all the best!");
+
+    // Confetti generator
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.backgroundColor = 
+        ["red","blue","green","yellow","purple","orange"][Math.floor(Math.random()*6)];
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(confetti);
+
+      setTimeout(() => { confetti.remove(); }, 5000);
+    }
+
+    setInterval(createConfetti, 200);
+  </script>
 </body>
 </html>
